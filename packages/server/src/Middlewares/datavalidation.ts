@@ -1,4 +1,3 @@
-// Yup custom validation throwing some wiered type checking error so typescript-igonre add for some line
 import * as yup from 'yup';
 import { Request, Response, NextFunction } from "express";
 
@@ -31,56 +30,5 @@ export default class validation {
 
     static userredirectdata = (req: Request, res: Response, next: NextFunction): void => {
         next()
-    }
-
-    static userregistration = (req: Request, res: Response, next: NextFunction): void => {
-
-        let schema = yup.object().shape({
-            fullname: yup.string().min(5, 'name must be atleast 5 characters long').max(100, 'name must be within 200 characters').matches(/[a-z\s]{5,100}/g, 'Only alphabets are allowed as name').lowercase().required('Required'),
-            email: yup.string().email().matches(/(^[a-zA-Z0-9._-]{2,100})(@[a-zA-Z0-9\-]{2,63})(.[a-zA-Z.-]{2,63})/g, 'valid emails are allowed as email').lowercase().required('Required'),
-            mobile: yup.string().min(10, 'mobile number must be 10 digit long').max(10, 'mobile number must be atleast 10 digit long').matches(/^(6|7|8|9)[0-9]{9}/g, 'Only numbers are allowed as mobile').nullable(),
-            password: yup.string().matches(/^[a-zA-Z0-9#%\+_\-@!&$*]+$/g, 'Password must be alphanumeric and should conatins only a-z A-Z 0-9 ! @ # $ % & * + - _').min(5, 'password must be atleast 5 characters long').max(20, 'password must be within 20 characters').required('Required'),
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            confirm_password: yup.string().oneOf([yup.ref('password'), null], "Passwords don't match!").required('Required')
-        });
-
-        schema
-            .validate({ ...req.body }, { strict: true })
-            .then(function (valid) {
-                // console.log(valid,'.........')
-                next()
-            }).catch(function (err) {
-
-                res.status(406).json({
-                    registration: false,
-                    type: err.name,
-                    error: err.errors
-                })
-            })
-    }
-
-    static usersignin = (req: Request, res: Response, next: NextFunction): void => {
-        let schema = yup.object().shape({
-
-            email: yup.string().email().matches(/(^[a-zA-Z0-9._-]{2,100})(@[a-zA-Z0-9\-]{2,63})(.[a-zA-Z.-]{2,63})/g, 'valid emails are allowed as email').lowercase().required('Required'),
-
-            password: yup.string().matches(/^[a-zA-Z0-9#%\+_\-@!&$*]+$/g, 'Password must be alphanumeric and should conatins only a-z A-Z 0-9 ! @ # $ % & * + - _').min(5, 'password must be atleast 5 characters long').max(20, 'password must be within 20 characters').required('Required'),
-
-        });
-
-        schema
-            .validate({ ...req.body }, { strict: true })
-            .then(function (valid) {
-                // console.log(valid,'.........')
-                next()
-            }).catch(function (err) {
-
-                res.status(406).json({
-                    registration: false,
-                    type: err.name,
-                    error: err.errors
-                })
-            })
     }
 }

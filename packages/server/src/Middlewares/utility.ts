@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose"
 import shortUrl from "../Models/miniURL.model"
-import userprofile from "../Models/user.profile.model";
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config()
@@ -49,18 +48,6 @@ export default class utility {
 
         }
         return ID;
-    }
-
-    static checkEmail = async (email: string): Promise<boolean | Error> => {
-
-        const find = await userprofile.find({ email });
-
-        // console.log(find)
-        if (find.length || email.length < 8) {
-            return true
-        } else {
-            return false
-        }
     }
 
     static createauthtoken = (name: string, ref: string): string => {
