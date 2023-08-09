@@ -72,7 +72,6 @@ const Redirectpath = (): React.JSX.Element => {
       }
 
       try {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         var userAgentData = window.navigator.userAgentData;
       } catch (error) {
@@ -145,7 +144,7 @@ const Redirectpath = (): React.JSX.Element => {
         window.location.replace(Pdata.destination!);
       }
     }
-  }, [Pdata]);
+  }, [Pdata,pathID]);
 
   if (Pdata.refid === "0") {
     return (
