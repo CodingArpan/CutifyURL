@@ -350,7 +350,7 @@ const Redirectpath = (): React.JSX.Element => {
           </form>
         </div>
       )}
-      <ThreeDotLoadingAnimation/>
+      {!Pdata.security && <ThreeDotLoadingAnimation />}
     </>
   );
 };

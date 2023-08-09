@@ -47,9 +47,7 @@ const Navbar= (): JSX.Element => {
 
             <div className="list absolute z-50 overflow-auto  w-[80%] md:w-max right-5 text-black  mt-8 bg-white py-5 rounded-md top-40 opacity-0 invisible mob_tab:peer-checked:opacity-100  mob_tab:peer-checked:visible mob_tab:peer-checked:top-7 md:top-20 md:-left-10 md:group-hover:top-5 md:group-hover:opacity-100 md:group-hover:visible transition-all ease-in-out duration-300 shadow-xl">
               <div className="">
-                <div className="py-3 px-5 hover:bg-[#e9ecef] hover:text-blue-600 transition-all ease-in-out duration-200">
-                  OptionOptionOptionOption
-                </div>
+                
                 <div className="py-3 px-5 hover:bg-[#e9ecef] hover:text-blue-600 transition-all ease-in-out duration-200">
                   Option1
                 </div>
