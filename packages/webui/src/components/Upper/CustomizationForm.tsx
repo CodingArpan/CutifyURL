@@ -32,7 +32,7 @@ const OptionsForm = (props: PropsModal): JSX.Element => {
   
     const checkkeyword = (keyword: string) => {
       if (keyword.length >= 4) {
-        fetch(`http://localhost:4000/url/avail/${keyword}`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/url/avail/${keyword}`, {
           method: "GET",
         })
           .then(async (res) => {
