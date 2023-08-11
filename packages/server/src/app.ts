@@ -5,11 +5,14 @@ import cors from 'cors'
 dotenv.config()
 import routes from './Routes/index'
 import db from './DB/DB'
+import serverless from 'serverless-http';
 
 
 const app = express();
 const PORT: string | 4000 = process.env.PORT || 4000;
 const DB_URL: string | any = process.env.DATABASE_URL;
+const whitelistorigins: string | any = process.env.WHITELISTORIGINS;
+
 
 
 app.use(express.json())
@@ -17,20 +20,11 @@ app.use(express.urlencoded({ extended: false }));
 app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
 
-const whitelistorigins: string | string[] = process.env.WHITELISTORIGINS || ['http://localhost:1000', 'http://localhost:1000']
 
-// interface corsOptionsType {
-//     origin: (string | boolean | RegExp | (RegExp | string)[] | ((origin: string, callback: () => void) => void));
-//     methods: string[],
-//     allowedHeaders: string[],
-//     credentials: boolean,
-//     preflightContinue: boolean,
-// }
 
 const corsOptions = {
-    // origin:'*',
     origin: (origin: string, callback: (arg0: string | null, arg1: boolean | undefined) => void) => {
-        console.log(origin,'--------------------------------')
+        console.log(origin, '--------------------------------')
         if (whitelistorigins.indexOf(origin) !== -1 && origin) {
             callback(null, true)
         } else {
@@ -45,12 +39,15 @@ const corsOptions = {
 
 }
 
+db(DB_URL);
+//@ts-ignore
+routes<cors.CorsOptions>(app, corsOptions);
 
+//only for local devlopment 
 app.listen(PORT, () => {
     console.log('App is running on port ' + `http://localhost:${PORT}`);
-    db(DB_URL);
-    //@ts-ignore
-    routes<cors.CorsOptions>(app, corsOptions);
 })
 
+// Onlo for deplyment on serverless Lambda server
+export const handler = serverless(app);
 

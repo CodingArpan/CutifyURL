@@ -5,8 +5,8 @@
   "main": "app.ts",
   "scripts": {
     "dev": "nodemon src/app.ts",
-    "test": "echo server is running well .... +++",
-    "build": "tsc"
+    "build": "rimraf server && tsc",
+    "test": "echo server is running well .... +++"
   },
   "keywords": [],
   "author": "",
@@ -19,17 +19,19 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^7.4.2",
+    "serverless-http": "^3.2.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13",
+    "@types/express": "^4.17.17",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^18.7.3",
     "@types/yup": "^0.29.14",
     "nodemon": "^3.0.1",
+    "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.9.5"
   }
 }
