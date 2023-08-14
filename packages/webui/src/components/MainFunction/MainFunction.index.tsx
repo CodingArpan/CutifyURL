@@ -1,9 +1,9 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import Navbar from "../Reusable/Navbar";
-import InputURL from "./InputUrl";
+import InputURL from "./URLInput";
 
-import UrlCustomize from "./UrlCustomize";
+import UrlCustomize from "./URLCustomization/CustomizationOptions";
 
 export interface Props {
   setActivateBtn: React.Dispatch<React.SetStateAction<boolean>>;

@@ -48,6 +48,6 @@ app.listen(PORT, () => {
     console.log('App is running on port ' + `http://localhost:${PORT}`);
 })
 
-// Onlo for deplyment on serverless Lambda server
+// Only for deplyment on serverless Lambda server
 export const handler = serverless(app);
 

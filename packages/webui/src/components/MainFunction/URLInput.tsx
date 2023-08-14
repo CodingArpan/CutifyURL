@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Props, PropsModal, Dataset } from "./Header.index";
+import { Props, PropsModal, Dataset } from "./MainFunction.index";
 
 const InputURL = (props: Props): JSX.Element => {
   let { setActivateBtn, ActivateBtn, setData, Data } = props;
