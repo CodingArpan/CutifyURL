@@ -21,7 +21,6 @@ const LinkLists = (props: LinkListProps) => {
       </p>
       <div className="LinkLists bg-slate-100 h-max rounded-lg p-3 space-y-5 ">
         <ListComponent />
-        <ListComponent />
       </div>
     </div>
   );

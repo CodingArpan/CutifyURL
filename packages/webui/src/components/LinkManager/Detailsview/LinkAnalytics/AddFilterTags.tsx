@@ -7,7 +7,7 @@ const AddFilterTags = () => {
     <div>
       {filtertags.map((tag, index) => {
         return (
-          <div className="relative group px-2 py-1 bg-slate-300 rounded-lg w-max">
+          <div key={index} className="relative group px-2 py-1 bg-slate-300 rounded-lg w-max">
             <div className="">{tag}</div>
             <div className="icon invisible group-hover:visible absolute top-0 right-0 cursor-pointer bg-blue-400 rounded-full">
               <svg

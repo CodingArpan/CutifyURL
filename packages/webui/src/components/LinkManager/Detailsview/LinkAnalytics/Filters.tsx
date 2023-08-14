@@ -22,7 +22,8 @@ const Filters = (props: FilterProps): JSX.Element => {
         return { ...DupReqFilters };
       });
     }
-  }, [Calldata]);
+  // }, [Calldata]);
+  }, []);
 
   return (
     <div className="flex flex-col space-y-3">
