@@ -4,11 +4,11 @@ import Optionsbar from "./Optionsbar";
 
 export interface Props {
   Active: string;
-  setActive: React.Dispatch<React.SetStateAction<String>>;
+  setActive: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ManagerIndex = () => {
-  const [Active, setActive] = useState<String>("Dashboard");
+  const [Active, setActive] = useState<string>("Dashboard");
   return (
     <div className="w-full">
       <div className="w-full m-auto max-w-7xl flex flex-col justify-between items-start p-10 space-x-5">
