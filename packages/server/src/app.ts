@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from 'express'
+import express, { Application, Express, Request, Response } from 'express'
 import path from "path";
 import dotenv from 'dotenv'
 import cors from 'cors'
@@ -8,7 +8,7 @@ import db from './DB/DB'
 import serverless from 'serverless-http';
 
 
-const app = express();
+const app: Application = express();
 const PORT: string | 4000 = process.env.PORT || 4000;
 const DB_URL: string | any = process.env.DATABASE_URL;
 const whitelistorigins: string | any = process.env.WHITELISTORIGINS;

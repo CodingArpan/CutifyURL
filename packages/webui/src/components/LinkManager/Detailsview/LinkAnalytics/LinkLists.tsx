@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import ListComponent from "./ListComponent";
-import { REQFilters } from "./LinkAnalytics.Index";
+import { REQFiltersTypes } from "./LinkAnalytics.Index";
 
 interface LinkListProps {
-  ReqFilters: REQFilters;
+  ReqFilters: REQFiltersTypes;
 }
 
 const LinkLists = (props: LinkListProps) => {

@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import Filters from "./Filters";
 import LinkLists from "./LinkLists";
 
-export interface REQFilters {
+export interface REQFiltersTypes {
   fromDate: string;
   toDate: string;
+  durationType: string;
+  tags: string[];
 }
 
 const LinkAnalyticsIndex = () => {
-  const [ReqFilters, setReqFilters] = useState<REQFilters>({
+  const [ReqFilters, setReqFilters] = useState<REQFiltersTypes>({
     fromDate: "",
     toDate: "",
+    durationType: "",
+    tags: [],
   });
 
   return (

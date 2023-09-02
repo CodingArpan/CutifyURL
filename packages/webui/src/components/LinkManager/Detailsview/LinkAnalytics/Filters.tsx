@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
 import CustomFilters from "./CustomFilters";
-import { REQFilters } from "./LinkAnalytics.Index";
+import { REQFiltersTypes } from "./LinkAnalytics.Index";
+
 interface FilterProps {
-  setReqFilters: React.Dispatch<React.SetStateAction<REQFilters>>;
-  ReqFilters: REQFilters;
+  setReqFilters: React.Dispatch<React.SetStateAction<REQFiltersTypes>>;
+  ReqFilters: REQFiltersTypes;
 }
 
 const Filters = (props: FilterProps): JSX.Element => {
+
   const { setReqFilters, ReqFilters }: FilterProps = props;
 
-  const [DupReqFilters, setDupReqFilters] = useState<REQFilters>({
+  const [DupReqFilters, setDupReqFilters] = useState<REQFiltersTypes>({
     ...ReqFilters,
   });
-
   const [ShowFilter, setShowFilter] = useState<boolean>(false);
   const [Calldata, setCalldata] = useState<boolean>(false);
 
   useEffect(() => {
     if (!ShowFilter && Calldata) {
-      setReqFilters((val: REQFilters): REQFilters => {
+      setReqFilters((val: REQFiltersTypes): REQFiltersTypes => {
         return { ...DupReqFilters };
       });
     }
@@ -27,12 +28,13 @@ const Filters = (props: FilterProps): JSX.Element => {
 
   return (
     <div className="flex flex-col space-y-3">
+
       <div className="flex justify-between items-center space-x-5">
         <div
           onClick={(): void => {
             setShowFilter(true);
           }}
-          className="filters cursor-pointer flex justify-center items-center w-max py-3 px-5 space-x-2 text-lg capitalize text-violet-600 bg-violet-100 rounded-xl"
+          className="filters cursor-pointer flex justify-center items-center w-max py-2 px-5 space-x-2 text-base capitalize text-violet-600 bg-violet-100 rounded-lg"
         >
           <div className="icon">
             <svg
@@ -83,7 +85,9 @@ const Filters = (props: FilterProps): JSX.Element => {
         setShowFilter={setShowFilter}
         setDupReqFilters={setDupReqFilters}
         setCalldata={setCalldata}
+        DupReqFilters={DupReqFilters}
       />
+      
     </div>
   );
 };
