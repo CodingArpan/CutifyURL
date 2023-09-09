@@ -11,7 +11,7 @@ const AddFilterTags = (props: CustomFilterProps) => {
   const [NewTag, setNewTag] = useState("");
   const [Invalidtag, setInvalidtag] = useState<boolean>(false);
   const [filtertags, setfiltertags] = useState<string[]>([]);
-  const [filtertaginput, setfiltertaginput] = useState<boolean>(false);
+  const [RemoveTag, setRemoveTag] = useState<number>(0);
 
   useEffect(() => {
     setDupReqFilters((val) => {
@@ -22,6 +22,15 @@ const AddFilterTags = (props: CustomFilterProps) => {
     });
   }, [filtertags]);
 
+  useEffect(() => {
+    setfiltertags((val) => {
+      val.splice(RemoveTag, 1);
+      return [...val];
+    });
+    setInvalidtag(false);
+    console.log(filtertags);
+  }, [RemoveTag]);
+
   return (
     <div className="relative flex flex-col w-full space-y-3">
       {Invalidtag && (
@@ -31,7 +40,7 @@ const AddFilterTags = (props: CustomFilterProps) => {
       )}
       <div className="w-full input flex justify-start items-center space-x-3 ">
         <input
-          defaultValue={NewTag}
+         
           onChange={(e) => {
             setNewTag(e.target.value.toLowerCase().trim());
           }}
@@ -72,18 +81,27 @@ const AddFilterTags = (props: CustomFilterProps) => {
           return (
             <div
               key={index}
-              className="relative flex justify-center items-center space-x-2 group px-3 py-1 bg-violet-400 rounded-full w-max"
+              className="relative flex justify-center items-center space-x-2 group px-3 py-1 bg-gray-200 rounded-full w-max"
             >
-              <div className="text-white">{tag}</div>
-              <div className="icon cursor-pointer overflow-hidden rounded-full">
+              <div className="text-gray-700">{tag}</div>
+              <div
+                // data-seq={index}
+                onClick={(e) => {
+                  const ele = e.target as HTMLElement;
+                  const id = Number(ele.dataset.seq);
+                  setRemoveTag(id);
+                }}
+                className="icon cursor-pointer overflow-hidden rounded-full"
+              >
                 <svg
+                  data-seq={index}
                   className="w-5 text-gray-300"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
                   <path
                     d="M175 175C184.4 165.7 199.6 165.7 208.1 175L255.1 222.1L303 175C312.4 165.7 327.6 165.7 336.1 175C346.3 184.4 346.3 199.6 336.1 208.1L289.9 255.1L336.1 303C346.3 312.4 346.3 327.6 336.1 336.1C327.6 346.3 312.4 346.3 303 336.1L255.1 289.9L208.1 336.1C199.6 346.3 184.4 346.3 175 336.1C165.7 327.6 165.7 312.4 175 303L222.1 255.1L175 208.1C165.7 199.6 165.7 184.4 175 175V175zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z"
-                    fill="white"
+                    fill="gray"
                   />
                 </svg>
               </div>

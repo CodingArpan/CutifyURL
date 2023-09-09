@@ -8,7 +8,6 @@ const Optionsbar = ({ Active, setActive }: Props) => {
         type="radio"
         name="selectone"
         id="dashboard_label"
-        defaultChecked
         onChange={(): void => {
           setActive(() => {
             return "Dashboard";
@@ -42,6 +41,7 @@ const Optionsbar = ({ Active, setActive }: Props) => {
         type="radio"
         name="selectone"
         id="FilterSearch_label"
+        defaultChecked
         onChange={(): void => {
           setActive(() => {
             return "LinkAnalyticsIndex";

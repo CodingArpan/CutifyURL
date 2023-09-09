@@ -43,25 +43,33 @@ const HeaderIndex = (): JSX.Element => {
   });
 
   return (
-    <div className="bg-[#363639] pb-10">
-      <Navbar />
-      <form
-        id="minifyreq"
-        className="system w-full m-auto max-w-5xl px-5 md:px-10 space-y-12 my-10 mt-20 relative"
-      >
-        <InputURL
-          setActivateBtn={setActivateBtn}
-          ActivateBtn={ActivateBtn}
-          setData={setData}
-          Data={Data}
-        />
-        <UrlCustomize
-          setActivateBtn={setActivateBtn}
-          ActivateBtn={ActivateBtn}
-          setData={setData}
-          Data={Data}
-        />
-      </form>
+    <div className=" pb-10 relative">
+      <div className="w-full h-full bg-orange-600"></div>
+      <div className="bg-white/0">
+        <Navbar />
+        <form
+          id="minifyreq"
+          className="system w-full m-auto max-w-5xl px-5 md:px-10 space-y-12 my-10 mt-20 relative"
+        >
+          <InputURL
+            setActivateBtn={setActivateBtn}
+            ActivateBtn={ActivateBtn}
+            setData={setData}
+            Data={Data}
+          />
+          <UrlCustomize
+            setActivateBtn={setActivateBtn}
+            ActivateBtn={ActivateBtn}
+            setData={setData}
+            Data={Data}
+          />
+        </form>
+        <div className="graphics absolute -z-10 w-full  flex flex-row justify-around -bottom-28">
+          <div className="circle w-60 h-60 bg-yellow-400/60 blur-3xl rounded-full"></div>
+          <div className="circle w-60 h-60 bg-blue-400/60 blur-3xl  "></div>
+          <div className="circle w-60 h-60 bg-violet-400/60 blur-3xl  rounded-full"></div>
+        </div>
+      </div>
     </div>
   );
 };

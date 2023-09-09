@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { Props, PropsModal, Dataset } from "./MainFunction.index";
-
+import { Jost } from "next/font/google";
+const jost = Jost({ weight: "400", subsets: ["latin"] });
 const InputURL = (props: Props): JSX.Element => {
   let { setActivateBtn, ActivateBtn, setData, Data } = props;
   const [ValidURL, setValidURL] = useState<boolean>(true);
@@ -123,7 +124,8 @@ const InputURL = (props: Props): JSX.Element => {
   return (
     <>
       <div
-        className={`bg-white/25 relative border-4 border-solid border-white  rounded-full flex flex-row justify-between items-center p-2.5  before:w-full  before:text-xl before:text-red-400 before:absolute before:-top-9 before:capitalize before:z-50 ${
+        style={jost.style}
+        className={`bg-white relative  border-solid  drop-shadow-lg  rounded-full flex flex-row justify-between items-center p-2.5  before:w-full  before:text-lg before:text-red-400 before:absolute before:-top-9 before:capitalize before:z-50 ${
           ValidURL ? "" : "before:content-['It_is_not_a_valid_URL_⚠️']"
         }`}
       >
@@ -134,11 +136,11 @@ const InputURL = (props: Props): JSX.Element => {
           onFocus={(e: React.FocusEvent<HTMLInputElement, Element>): void => {
             !MinifiedURL ? paste(e) : "";
           }}
-          className="text-white text-lg px-3 mr-2 font-semibold w-full bg-transparent rounded-full outline-none border-none placeholder:text-slate-300 tracking-wider"
+          className="text-gray-500 text-lg px-3 mr-2 font-normal w-full bg-none rounded-full outline-none border-none placeholder:text-slate-300 tracking-wider"
           type="text"
           name="destination"
           id="destination"
-          placeholder="https://example.com/*"
+          placeholder="Paste Your Link Here : www.your_url.com/*"
         />
 
         <div className="flex flex-row justify-center items-center space-x-5 mob_only:absolute mob_only:-bottom-14  mob_only:w-full mob_only:right-0  ">
@@ -149,7 +151,7 @@ const InputURL = (props: Props): JSX.Element => {
               e.preventDefault();
               resetAll();
             }}
-            className={`minifybtn font-semibold text-base capitalize px-10 py-1 bg-white text-black hover:scale-105 active:scale-90
+            className={`minifybtn font-semibold text-base capitalize px-10 py-1 border-2 border-custom_blue  text-custom_blue hover:scale-105 active:scale-90
                    rounded-full cursor-pointer  transition-all ease-in-out duration-200 `}
           >
             clear
@@ -165,7 +167,7 @@ const InputURL = (props: Props): JSX.Element => {
               }}
               className={`minifybtn font-semibold text-base capitalize px-10 py-1  ${
                 ActivateBtn
-                  ? "bg-white text-black hover:scale-105 active:scale-90"
+                  ? " border-2 border-violet-500 bg-violet-200 text-violet-800 hover:scale-105 active:scale-90"
                   : "bg-gray-300 text-gray-600"
               } rounded-full cursor-pointer  transition-all ease-in-out duration-200 `}
             >

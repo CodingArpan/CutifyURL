@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "test":"echo UI is running well .... +++",
+    "test": "echo UI is running well .... +++",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -22,5 +22,9 @@
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4"
   }
 }
