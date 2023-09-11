@@ -125,7 +125,7 @@ const InputURL = (props: Props): JSX.Element => {
     <>
       <div
         style={jost.style}
-        className={`bg-white relative  border-solid  drop-shadow-lg  rounded-full flex flex-row justify-between items-center p-2.5  before:w-full  before:text-lg before:text-red-400 before:absolute before:-top-9 before:capitalize before:z-50 ${
+        className={`bg-blue-50 border border-blue-400/10 relative  border-solid shadow-lg shadow-blue-500/30 rounded-full flex flex-row justify-between items-center p-2.5  before:w-full  before:text-lg before:text-red-400 before:absolute before:-top-9 before:capitalize before:z-50 ${
           ValidURL ? "" : "before:content-['It_is_not_a_valid_URL_⚠️']"
         }`}
       >
@@ -136,7 +136,7 @@ const InputURL = (props: Props): JSX.Element => {
           onFocus={(e: React.FocusEvent<HTMLInputElement, Element>): void => {
             !MinifiedURL ? paste(e) : "";
           }}
-          className="text-gray-500 text-lg px-3 mr-2 font-normal w-full bg-none rounded-full outline-none border-none placeholder:text-slate-300 tracking-wider"
+          className="text-gray-500 text-lg px-3 mr-2 font-normal w-full  rounded-full outline-none border-none tracking-wider bg-transparent"
           type="text"
           name="destination"
           id="destination"
