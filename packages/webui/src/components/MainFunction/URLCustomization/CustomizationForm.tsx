@@ -6,6 +6,7 @@ const OptionsForm = (props: PropsModal): JSX.Element => {
   let { Modal, setModal, setData } = props;
   const [Showpas, setShowpas] = useState<boolean>(false);
   const [Keyword, setKeyword] = useState<boolean>(false);
+  const [Pwdlength, setPwdlength] = useState<number>(6);
 
   const datachanged = (name: string, value: string | boolean): void => {
     setData((val): Dataset => {
@@ -27,6 +28,15 @@ const OptionsForm = (props: PropsModal): JSX.Element => {
           datachanged("secure", false);
         }
         break;
+    }
+  };
+
+  const setPassword = (name: string, passWord: string) => {
+    setPwdlength(passWord.length);
+    if (passWord.length >= 6) {
+      datachanged(name, passWord);
+    } else {
+      datachanged(name, "");
     }
   };
 
@@ -107,7 +117,7 @@ const OptionsForm = (props: PropsModal): JSX.Element => {
         </div>
         <input
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            datachanged(e.target.name, e.target.value);
+            setPassword(e.target.name, e.target.value);
           }}
           className="w-full  border border-1 py-2 px-4 rounded-full text-lg font-normal text-gray-800 bg-blue-50 outline-none"
           type={!Showpas ? "password" : "text"}
@@ -115,6 +125,11 @@ const OptionsForm = (props: PropsModal): JSX.Element => {
           id="password"
           placeholder="Enter Your password"
         />
+        {Pwdlength < 6 && (
+          <p className="text-rose-500 px-4">
+            Password must be 6 or more character long 🚫
+          </p>
+        )}
       </div>
       <div className="flex flex-col space-y-2">
         <label className="px-4 py-2" htmlFor="keyword">

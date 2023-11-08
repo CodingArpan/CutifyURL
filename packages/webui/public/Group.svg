@@ -1,0 +1,22 @@
+<svg width="646" height="669" viewBox="0 0 646 669" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M434.533 129.528C489.355 167.897 481.435 248.489 477.997 315.314C474.781 377.818 465.464 443.992 416.357 482.794C366.841 521.92 298.765 521.403 237.793 505.114C178.829 489.362 127.233 453.16 100.344 398.37C72.7453 342.135 64.667 272.958 97.7547 219.769C128.457 170.415 194.745 171.41 250.89 156.366C313.759 139.52 381.207 92.2067 434.533 129.528Z" fill="white"/>
+<path d="M537.431 480.842C537.431 486.361 532.95 490.842 527.431 490.842H168.451C162.932 490.842 158.451 486.361 158.451 480.842V233.016C158.451 227.497 162.932 223.016 168.451 223.016H527.431C532.95 223.016 537.431 227.497 537.431 233.016V480.842Z" fill="black"/>
+<path d="M537.431 490.84H158.451L77.665 526.984H618.217L537.431 490.84Z" fill="black"/>
+<path d="M618.217 541.06H77.665V526.984H618.217V541.06Z" fill="black"/>
+<path d="M524.244 477.655H171.636V236.201H524.244V477.655Z" fill="#6B3CCD"/>
+<mask id="mask0_10_846" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="46" y="69" width="600" height="600">
+<path d="M46 69H646V669H46V69Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_10_846)">
+<path d="M477.766 299.547H221.828V273.931H477.766V299.547Z" fill="white" fill-opacity="0.91"/>
+<path d="M477.766 334.596H221.828V308.98H477.766V334.596Z" fill="white" fill-opacity="0.91"/>
+<path d="M477.766 369.646H221.828V344.03H477.766V369.646Z" fill="white" fill-opacity="0.91"/>
+<path d="M477.766 404.695H221.828V379.079H477.766V404.695Z" fill="white" fill-opacity="0.91"/>
+<path d="M477.766 439.745H221.828V414.129H477.766V439.745Z" fill="white" fill-opacity="0.91"/>
+<path d="M465.766 492.163H402.894C396.294 492.163 390.894 486.763 390.894 480.163V478.547C390.894 471.947 396.294 466.547 402.894 466.547H465.766C472.366 466.547 477.766 471.947 477.766 478.547V480.163C477.766 486.763 472.366 492.163 465.766 492.163Z" fill="white" fill-opacity="0.91"/>
+<path d="M232.142 286.738H337.509" stroke="#F5A623" stroke-width="5" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M232.142 321.788H306.896" stroke="#F5A623" stroke-width="5" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M232.142 356.838H322.199" stroke="#F5A623" stroke-width="5" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M232.142 391.887C232.142 391.887 276.774 391.887 303.197 391.887" stroke="#F5A623" stroke-width="5" stroke-miterlimit="10" stroke-linecap="round"/>
+</g>
+</svg>

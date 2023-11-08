@@ -75,3 +75,4 @@ const HeaderIndex = (): JSX.Element => {
 };
 
 export default HeaderIndex;
+
