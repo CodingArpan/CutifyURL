@@ -51,7 +51,7 @@ function SignIn() {
             </button>
           </div>
           <p className="px-6 text-sm text-center ">
-            Don't have an account yet?
+            Don&#39;t have an account yet?
             <Link href="/auth/signup">
               <span className="underline text-sm text-violet-500 cursor-pointer px-2">
                 Sign up
