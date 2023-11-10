@@ -1,8 +1,13 @@
 import React from "react";
 import Link from "next/link";
-function SignIn() {
+import { AlertPropsType } from "@/components/TypeInterfaces/PropsInterfaces";
+function SignIn({
+  setAlertdata,
+}: {
+  setAlertdata: React.Dispatch<React.SetStateAction<AlertPropsType>>;
+}) {
   return (
-    <div className="form py-10 flex flex-col justify-center items-center space-y-5 bg-white rounded-3xl w-1/2">
+    <div className="form w-full py-10 px-20  flex flex-col justify-center items-center space-y-5 bg-white rounded-3xl ">
       <div className="mb-8 text-center">
         <h1 className="my-3 text-4xl font-bold">Sign in</h1>
         <p className="text-sm ">Sign in to access your account</p>
@@ -45,12 +50,13 @@ function SignIn() {
           <div>
             <button
               type="button"
-              className="bg-violet-400 shadow-lg shadow-violet-500/30 w-fit px-10 py-2 text-white font-medium rounded-full transition-all hover:scale-105 active:scale-95"
+              className="bg-violet-400 shadow-lg shadow-violet-500/30 w-fit px-10 py-2
+               text-white font-medium rounded-full transition-all hover:scale-105 active:scale-95"
             >
               Sign in
             </button>
           </div>
-          <p className="px-6 text-sm text-center ">
+          <p className="w-full px-6 text-sm text-center ">
             Don&#39;t have an account yet?
             <Link href="/auth/signup">
               <span className="underline text-sm text-violet-500 cursor-pointer px-2">

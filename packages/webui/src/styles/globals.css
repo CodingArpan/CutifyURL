@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* * {
+* {
   user-select: none;
   transition: all;
-  transition-duration: 20s;
+  transition-duration: 0.2s;
   transition-timing-function: ease-in;
-} */
-
+}

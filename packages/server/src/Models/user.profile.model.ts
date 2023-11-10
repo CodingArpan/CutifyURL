@@ -32,6 +32,8 @@ const createprofile = new Schema({
         type: String,
         minLength: [10, 'Mobile Number Must Be 10 Digit Long'],
         maxLength: [10, 'Mobile Number Must Be 10 Digit Long'],
+        unique: true,
+        trim: true,
 
     },
     confirmpwd: {

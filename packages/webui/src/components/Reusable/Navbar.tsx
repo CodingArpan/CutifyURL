@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Concert_One, Josefin_Sans } from "next/font/google";
 const ConcertOne = Concert_One({ weight: "400", subsets: ["latin"] });
 const JosefinSans = Josefin_Sans({ weight: "600", subsets: ["latin"] });
@@ -77,12 +78,16 @@ const Navbar = (): JSX.Element => {
           <div className="px-2 py-1.5  cursor-pointer hidden md:block ">
             pricing
           </div>
-          <div className="px-8 py-1.5 rounded-full bg-custom_blue  cursor-pointer hidden md:block text-white ">
-            sign up
-          </div>
-          <div className="px-8 py-1.5 rounded-full border-2 border-custom_blue text-custom_blue  cursor-pointer hidden md:block ">
-            log in
-          </div>
+          <Link href="/auth/signup">
+            <div className="px-8 py-1.5 rounded-full bg-custom_blue  cursor-pointer hidden md:block text-white ">
+              sign up
+            </div>
+          </Link>
+          <Link href="/auth/signin">
+            <div className="px-8 py-1.5 rounded-full border-2 border-custom_blue text-custom_blue  cursor-pointer hidden md:block ">
+              log in
+            </div>
+          </Link>
           <div className=" rounded-full border-4 border-custom_blue">
             <div className="w-12 h-12 rounded-full  border-2 border-white  bg-[url('https://media.licdn.com/dms/image/D4D35AQGZZA8W825mMg/profile-framedphoto-shrink_400_400/0/1690870287630?e=1694430000&v=beta&t=NI9jA8ByOl6pNahADVGuv-19YV6PHmf__AjcO9Ydx9c')] bg-center bg-cover"></div>
           </div>

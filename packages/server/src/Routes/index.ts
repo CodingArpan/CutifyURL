@@ -20,8 +20,8 @@ const routes = <T extends cors.CorsOptions>(app: Express, corsOptions: T): void 
 
     // app.get('/:redirectid', redirection.handelRedirect)
 
-    // app.use(cors(corsOptions)) // restrict access to other than client side
-    app.use(cors()) // restrict access to other than client side
+    app.use(cors(corsOptions)) // restrict access to other than client side
+    // app.use(cors()) // restrict access to other than client side
 
     app.use('/url', buildMiniUrl)
 

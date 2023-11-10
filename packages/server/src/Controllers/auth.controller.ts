@@ -42,12 +42,33 @@ export default class authenticate {
             });
             // return res.redirect('/user/dashboard');
 
-            return res.status(200).json({ request: 'successfull', registration: true, message: 'Profile created successfully' })
+            return res.status(200).json({
+                registration: true,
+                status: 'success',
+                type: "profile created",
+                message: 'Your Profile created successfully'
+            })
 
-        } catch (err) {
-            console.log(err)
+        } catch (err: any) {
+            console.log({ ...err });
+            if (err.code === 11000) {
+                return res.status(409).json({
+                    registration: false,
+                    status: 'warning',
+                    type: 'duplicate',
+                    message: "This email or mobile is associated with another account",
+                    list: err.keyValue
+                })
+            }
 
-            return res.status(200).json({ request: 'failed', registration: false, message: 'Internal Server Error' })
+            return res.status(500).json({
+                registration: false,
+                status: 'error',
+                type: 'exception',
+                message: 'Internal Server Error',
+                list:[]
+
+            })
         }
     }
 

@@ -1,18 +1,81 @@
 "use client";
-import React from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
-import SignUp from "@/components/AuthManager/SignUp";
+import SignUp from "@/components/AuthManager/SignUp/SignUp";
 import SignIn from "@/components/AuthManager/SignIn";
-function Auth_page({ params }: { params: { type: string } }) {
-  return (
-    <div className="relative bg-violet-400  m-auto w-3/5 mt-5 rounded-3xl drop-shadow-[0_4px_45px_#a78bfa] flex flex-row justify-between items-center">
-      {params.type == "signup" ? <SignUp /> : ""}
-      {params.type == "signin" ? <SignIn /> : ""}
 
-      <div className="graphics relative w-1/2 p-10 bg-transparent flex justify-center items-center ">
-        <Image width={600} height={600} src={"/Group.svg"} alt="image" />
+import InformAlert from "@/components/Reusable/InformAlert";
+import { AlertContext } from "@/components/ContextManager/AlertContextProvider/AlertContext";
+import { AlertContextType } from "@/components/TypeInterfaces/ContextInterfaces";
+import { AlertPropsType } from "@/components/TypeInterfaces/PropsInterfaces";
+
+function Auth_page({ params }: { params: { type: string } }) {
+  // ------------------------------ Alert Box feature-------------------
+
+  const [Visibility, setVisibility] =
+    useState<AlertContextType["Visibility"]>(false);
+  const [Alertdata, setAlertdata] = useState<AlertPropsType>({
+    type: "",
+    title: "",
+    message: "",
+    list: [],
+  });
+  const hideAlert = () => {
+    const alertbox = document.getElementById("alertbox");
+    !Visibility && alertbox?.style.setProperty("top", "-10rem");
+    Visibility && alertbox?.style.setProperty("top", "1rem");
+  };
+
+  useEffect(() => {
+    Alertdata.title && setVisibility(true);
+  }, [Alertdata]);
+  useEffect(() => {
+    hideAlert();
+    !Visibility &&
+      setAlertdata({
+        type: "",
+        title: "",
+        message: "",
+        list: [],
+      });
+  }, [Visibility]);
+  useEffect(() => {
+    hideAlert();
+    setVisibility(false);
+  }, []);
+  // ------------------------------------------------------------------
+
+  return (
+    <>
+      <AlertContext.Provider value={{ Visibility, setVisibility }}>
+        <InformAlert
+          type={Alertdata.type}
+          title={Alertdata.title}
+          message={Alertdata.message}
+          list={Alertdata.list}
+        />
+      </AlertContext.Provider>
+      <div className="w-full  bg-blue-50 h-screen min-h-max flex flex-row justify-center items-center ">
+        <div className="relative bg-violet-400    h-fit rounded-3xl shadow-2xl shadow-indigo-500/30 flex flex-row justify-between items-center">
+          {params.type == "signup" ? (
+            <SignUp setAlertdata={setAlertdata} />
+          ) : (
+            ""
+          )}
+          {params.type == "signin" ? (
+            <SignIn setAlertdata={setAlertdata} />
+          ) : (
+            ""
+          )}
+
+          <div className="graphics relative w-max p-10 bg-transparent flex justify-center items-center ">
+            <div className="imagecontainer w-80 h-80 ">
+              <Image fill src={"/Group.svg"} alt="image" />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -34,9 +34,9 @@ export default class validation {
 
 
     static userregistration = (req: Request, res: Response, next: NextFunction): void => {
-
+        // console.log(req.body);
         let schema = yup.object().shape({
-            fullname: yup.string().min(5, 'name must be atleast 5 characters long').max(100, 'name must be within 200 characters').matches(/[a-z\s]{5,100}/g, 'Only alphabets are allowed as name').lowercase().required('Required'),
+            fullname: yup.string().min(3, 'name must be atleast 3 characters long').max(100, 'name must be within 100 characters').matches(/[a-zA-Z\s]{3,100}/g, 'Only alphabets are allowed as name').lowercase().required('Required'),
             email: yup.string().email().matches(/(^[a-zA-Z0-9._-]{2,100})(@[a-zA-Z0-9\-]{2,63})(.[a-zA-Z.-]{2,63})/g, 'valid emails are allowed as email').lowercase().required('Required'),
             mobile: yup.string().min(10, 'mobile number must be 10 digit long').max(10, 'mobile number must be atleast 10 digit long').matches(/^(6|7|8|9)[0-9]{9}/g, 'Only numbers are allowed as mobile').nullable(),
             password: yup.string().matches(/^[a-zA-Z0-9#%\+_\-@!&$*]+$/g, 'Password must be alphanumeric and should conatins only a-z A-Z 0-9 ! @ # $ % & * + - _').min(5, 'password must be atleast 5 characters long').max(20, 'password must be within 20 characters').required('Required'),
@@ -49,10 +49,15 @@ export default class validation {
                 // console.log(valid,'.........')
                 next()
             }).catch(function (err: any) {
-
+                console.log({ ...err })
                 res.status(406).json({
                     registration: false,
+                    status: 'warning',
                     type: err.name,
+                    message: "please enter correct data",
+                    list: [],
+                    // optional data sending
+                    field: err.path,
                     error: err.errors
                 })
             })
