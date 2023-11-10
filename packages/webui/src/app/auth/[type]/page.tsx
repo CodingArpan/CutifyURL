@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import SignUp from "@/components/AuthManager/SignUp/SignUp";
-import SignIn from "@/components/AuthManager/SignIn";
+import SignIn from "@/components/AuthManager/SignIn/SignIn";
 
 import InformAlert from "@/components/Reusable/InformAlert";
 import { AlertContext } from "@/components/ContextManager/AlertContextProvider/AlertContext";

@@ -44,6 +44,7 @@ function SignUp({
         const nameRegx = /^[a-zA-Z\s]{3,}/g;
         const nameTest = nameRegx.test(userInput);
         nameTest ? setName(true) : setName(false);
+        nameTest ? (e.target.value = e.target.value.toLowerCase()) : "";
         nameTest && (dataValidation = true);
         break;
       case "email":
@@ -51,6 +52,7 @@ function SignUp({
           /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/gi;
         const emailTest = emailRegx.test(userInput);
         emailTest ? setEmail(true) : setEmail(false);
+        emailTest ? (e.target.value = e.target.value.toLowerCase()) : "";
         emailTest && (dataValidation = true);
         break;
       case "mobile":
@@ -81,7 +83,7 @@ function SignUp({
     console.log(e.target.name, e.target.value);
     if (checkUserInputData(e)) {
       setFormData((FormData) => {
-        return { ...FormData, [e.target.name]: e.target.value.toLowerCase() };
+        return { ...FormData, [e.target.name]: e.target.value };
       });
       console.log(FormData);
     }
@@ -113,9 +115,6 @@ function SignUp({
       setPwd(false);
       setCnfPwd(false);
     }
-    setTimeout(() => {
-      setLoader(false);
-    }, 500);
   };
 
   const createAccount = async (): Promise<void> => {
@@ -174,6 +173,9 @@ function SignUp({
         list: [],
       });
     }
+    setTimeout(() => {
+      setLoader(false);
+    }, 500);
   };
 
   const formElementDiv: string = "w-full  flex flex-col space-y-1";
