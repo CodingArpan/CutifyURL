@@ -4,6 +4,7 @@ import shortUrl, { Shorturl_temp } from "../Models/miniURL.model";
 import userData, { userdata_temp } from "../Models/userdata.model";
 import userprofile, { createprofile_temp } from '../Models/user.profile.model';
 import utility from "../Middlewares/utility";
+import { authenticateTokenReturnType } from "../Interfaces/interfaces";
 // import { boolean } from "yup";
 
 
@@ -66,43 +67,52 @@ export default class authenticate {
                 status: 'error',
                 type: 'exception',
                 message: 'Internal Server Error',
-                list:[]
+                list: []
 
             })
         }
     }
 
-    static emailstatus = async (req: Request, res: Response): Promise<Response> => {
+    static accessToken = async (req: Request, res: Response): Promise<Response> => {
+
         try {
+            const accessToken: string | undefined = req?.headers?.cookie?.split('=')[1] ?? undefined;
+            console.log(accessToken, '........')
+            if (accessToken) {
+                const authentication: authenticateTokenReturnType = utility.authenticateToken(accessToken);
+                console.log(authentication, '...')
+                if (authentication.authtoken) {
+                    return res.status(200).json({
+                        authentication: authentication.authtoken,
+                        message: 'session active',
+                        userdata: authentication.userdata
+                    })
+                } else {
+                    return res.status(401).json({
+                        authentication: authentication.authtoken,
+                        message: 'session expired, please sign in again',
+                        userdata: authentication.userdata
+                    })
+                }
+            } else {
+                return res.status(401).json({
+                    authentication: false,
+                    message: 'session expired, please sign in again',
+                    userdata: null
 
-            let { email }: { email: string } = req.body;
-            let validemail: boolean = new RegExp(/(^[a-zA-Z0-9._-]{2,100})(@[a-zA-Z0-9\-]{2,63})(.[a-zA-Z.-]{2,63})/g).test(email)
-
-            let status: boolean | Error = true;
-            if (validemail) {
-                status = await utility.checkEmail(email);
-            }
-
-            if (!status) {
-                return res.status(200).json({
-                    request: 'successfull',
-                    availability: true,
-                    message: 'all is ok'
                 })
             }
-            return res.status(451).json({
-                request: 'successfull',
-                availability: false,
-                message: "This email is already in use"
-            })
         } catch (error) {
-            console.log(error)
-            return res.status(451).json({
-                request: 'failed',
-                availability: false,
-                message: "Internal Server Error"
+            console.log(error);
+            return res.status(401).json({
+                authentication: false,
+                message: 'session expired, please sign in again',
+                userdata: null
+
             })
         }
+
+        return res.status(200).json({ request: 'successfull', authentication: true, message: 'credentials authenticated successfully' });
     }
 
     static login = async (req: Request, res: Response): Promise<Response> => {
@@ -164,6 +174,25 @@ export default class authenticate {
 
 
 
+    }
+
+    static logout = async (req: Request, res: Response): Promise<Response> => {
+        console.log(req.body, ".....logout.....");
+        try {
+            res.cookie('accesstoken', '', {
+                domain: process.env.COOKIE_DOMAIN,
+                maxAge: 1000,
+                httpOnly: true,
+                path: '/',
+                sameSite: 'strict',
+                secure: true,
+                // signed: true,
+            });
+            return res.status(200).json({ request: 'successfull', authentication: false, message: 'Logged out successfully' })
+        } catch (error) {
+            console.log(error)
+            return res.status(401).json({ request: 'failed', authentication: false, message: 'Internal Server Error' })
+        }
     }
 
 }

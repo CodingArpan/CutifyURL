@@ -4,3 +4,4 @@ export interface AlertPropsType {
   message?: string;
   list?: string[];
 }
+export type UserType = { name: string; ref: string } | null;

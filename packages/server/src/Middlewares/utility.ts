@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose"
 import shortUrl from "../Models/miniURL.model"
 import userprofile from "../Models/user.profile.model";
-
+import { authenticateTokenReturnType } from "../Interfaces/interfaces";
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config()
@@ -73,19 +73,19 @@ export default class utility {
         return authToken;
     }
 
-    static authenticatetoken = (accesstoken: string): { authtoken: boolean; userdata: any; } => {
+    static authenticateToken = (accesstoken: string): authenticateTokenReturnType => {
 
         try {
             let decoded: string | any = jwt.verify(accesstoken, jwtkey!);
             console.log(decoded.data)
-            let status = {
+            let status: authenticateTokenReturnType = {
                 authtoken: true,
                 userdata: decoded.data
             }
             return status;
         } catch (err) {
             console.log(err, '................')
-            let status = {
+            let status: authenticateTokenReturnType = {
                 authtoken: false,
                 userdata: null
             }
@@ -93,16 +93,18 @@ export default class utility {
         }
     }
 
-    static verifyauthtoken_optional = (req: Request, res: Response, next: NextFunction): void => {
-        const headers: string = JSON.stringify(req.headers);
-        const parsedHeaders = JSON.parse(headers);
-        // console.log(parsedHeaders)
-        if (parsedHeaders.accesstoken && parsedHeaders.credentials === 'include') {
-            const authentication: { authtoken: boolean; userdata: any; } = this.authenticatetoken(parsedHeaders.accesstoken);
+    static verifyAuthTokenOptional = (req: Request, res: Response, next: NextFunction): void => {
+        const accessToken: string | undefined = req?.headers?.cookie?.split('=')[1] ?? undefined;
+
+        console.log(req?.headers)
+        console.log(accessToken)
+        if (accessToken) {
+            const authentication: authenticateTokenReturnType = this.authenticateToken(accessToken);
             // console.log(authentication, '...')
             if (authentication.authtoken) {
-                req.body.login = authentication.authtoken
-                req.body.userid = authentication.userdata.ref
+                req.body.login = authentication.authtoken;
+                req.body.userid = authentication?.userdata?.ref;
+                console.log(req.body)
                 next()
             } else {
 
@@ -115,11 +117,11 @@ export default class utility {
 
     }
 
-    static verifyauthtoken_mandatory = (req: Request, res: Response, next: NextFunction): Response | void => {
-        const headers: string = JSON.stringify(req.headers);
-        const parsedHeaders = JSON.parse(headers);
-        if (parsedHeaders.accesstoken && parsedHeaders.credentials === 'include') {
-            const authentication: { authtoken: boolean; userdata: any; } = this.authenticatetoken(parsedHeaders.accesstoken)
+    static verifyAuthTokenMandatory = (req: Request, res: Response, next: NextFunction): Response | void => {
+        const accessToken: string | undefined = req?.headers?.cookie?.split('=')[1] ?? undefined;
+
+        if (accessToken) {
+            const authentication: { authtoken: boolean; userdata: any; } = this.authenticateToken(accessToken);
             if (authentication.authtoken) {
                 req.body.login = authentication.authtoken;
                 req.body.userid = authentication.userdata.ref;

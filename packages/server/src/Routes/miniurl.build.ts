@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/avail/:keyword', miniurl.validatekeyword)
 
-router.post('/short', utility.verifyauthtoken_optional, validation.shorturlrequest, miniurl.createShortUrl)
+router.post('/short', utility.verifyAuthTokenOptional, validation.shorturlrequest, miniurl.createShortUrl)
 
 
 

@@ -13,11 +13,12 @@ const InputURL = (props: Props): JSX.Element => {
   ) => {
     e.preventDefault();
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/url/short`, {
+      mode: "cors",
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      // credentials: "include",
+      credentials: "include",
       body: JSON.stringify(Data),
     })
       .then(async (response) => {

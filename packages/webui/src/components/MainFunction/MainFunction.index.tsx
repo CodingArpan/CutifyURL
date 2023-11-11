@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Reusable/Navbar";
 import InputURL from "./URLInput";
-
+import { UserType } from "@/components/TypeInterfaces/PropsInterfaces";
 import UrlCustomize from "./URLCustomization/CustomizationOptions";
 
 export interface Props {
@@ -29,7 +29,45 @@ export interface Dataset {
   track: boolean;
 }
 
+
 const HeaderIndex = (): JSX.Element => {
+  const [User, setUser] = useState<UserType>(null);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/checkaccesstoken`, {
+      mode: "cors",
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userid: "" }),
+    })
+      .then(async (res) => {
+        //   {
+        //     "authentication": true,
+        //     "message": "session active",
+        //     "userdata": {
+        //         "name": "arpan das",
+        //         "ref": "654e3896809859186734fd35"
+        //     }
+        // }
+        const response = await res.json();
+        return response;
+      })
+      .then((data) => {
+        if (data?.authentication) {
+          setUser({ ...data?.userdata });
+        } else {
+          setUser(null);
+        }
+        console.log(data);
+      })
+      .catch((error) => {
+        setUser(null);
+        console.log(error);
+      });
+  }, []);
   const [ActivateBtn, setActivateBtn] = useState<boolean>(false);
   const [Data, setData] = useState<Dataset>({
     destination: "",
@@ -46,7 +84,8 @@ const HeaderIndex = (): JSX.Element => {
     <div className=" pb-10 relative">
       <div className="w-full h-full bg-orange-600"></div>
       <div className="bg-white/0">
-        <Navbar />
+        <Navbar User={User} setUser={setUser} />
+
         <form
           id="minifyreq"
           className="system w-full m-auto max-w-5xl px-5 md:px-10 space-y-12 my-10 mt-20 relative"
@@ -75,4 +114,3 @@ const HeaderIndex = (): JSX.Element => {
 };
 
 export default HeaderIndex;
-
