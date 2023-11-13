@@ -1,0 +1,17 @@
+service: cutifyurl-serverless
+useDotenv: false
+provider:
+  name: aws
+  deploymentMethod: direct
+  runtime: nodejs18.x
+  stage: dev
+  region: ap-south-1
+  timeout: 10
+functions:
+  app:
+    handler: handler.hello # required, handler set in AWS Lambda
+    name: cutifyurl-serverless # optional, Deployed Lambda name
+    description: Demo testing of serverless # optional, Description to publish to AWS
+    runtime: nodejs18.x # optional overwrite, default is provider runtime
+    runtimeManagement:
+      mode: auto # syntax required for manual, mode property also supports 'auto' or 'onFunctionUpdate' (see provider.runtimeManagement)
