@@ -8,7 +8,7 @@ interface pwdType {
   password: string;
   confirm_password: string;
 }
-function page({ params }: { params: { resetid: string } }) {
+function Page({ params }: { params: { resetid: string } }) {
   const router = useRouter();
 
   const [Pwd, setPwd] = useState<pwdType>({
@@ -240,4 +240,4 @@ function page({ params }: { params: { resetid: string } }) {
   );
 }
 
-export default page;
+export default Page;
