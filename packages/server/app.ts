@@ -1,10 +1,10 @@
-import express, { Application, Express, Request, Response } from 'express'
+import express, { Application } from 'express'
 import path from "path";
 import dotenv from 'dotenv'
 import cors from 'cors'
 dotenv.config()
-import routes from './Routes/index'
-import db from './DB/DB'
+import routes from './src/Routes/index'
+import db from './src/DB/DB'
 import serverless from 'serverless-http';
 
 
@@ -44,6 +44,7 @@ db(DB_URL);
 routes<cors.CorsOptions>(app, corsOptions);
 
 //only for local devlopment 
+// comment this code when you deploy on serverless lambda server
 app.listen(PORT, () => {
     console.log('App is running on port ' + `http://localhost:${PORT}`);
 })

@@ -5,7 +5,7 @@ import utility from '../Middlewares/utility'
 
 const router = express.Router();
 
-router.get('/avail/:keyword', miniurl.validatekeyword)
+router.post('/availkeyword', miniurl.validatekeyword)
 
 router.post('/short', utility.verifyAuthTokenOptional, validation.shorturlrequest, miniurl.createShortUrl)
 

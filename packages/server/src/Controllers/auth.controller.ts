@@ -37,7 +37,7 @@ export default class authenticate {
                 maxAge: 24 * 60 * 60 * 1000,
                 httpOnly: true,
                 path: '/',
-                sameSite: 'strict',
+                sameSite: 'none',
                 secure: true,
                 // signed: true,
             });
@@ -77,7 +77,8 @@ export default class authenticate {
 
         try {
             const accessToken: string | undefined = req?.headers?.cookie?.split('=')[1] ?? undefined;
-            console.log(accessToken, '........')
+            // console.log(".....accessToken...... = ", accessToken);
+
             if (accessToken) {
                 const authentication: authenticateTokenReturnType = utility.authenticateToken(accessToken);
                 console.log(authentication, '...')
@@ -112,7 +113,6 @@ export default class authenticate {
             })
         }
 
-        return res.status(200).json({ request: 'successfull', authentication: true, message: 'credentials authenticated successfully' });
     }
 
     static login = async (req: Request, res: Response): Promise<Response> => {
@@ -121,9 +121,9 @@ export default class authenticate {
 
 
             let { email, password }: ({ password: string; email: string; }) = req.body;
-            console.log(email, password);
+            // console.log(email, password);
             const user = await userprofile.findOne({ email }).select('fullname confirmpwd');
-            console.log(user, '....')
+            // console.log(user, '....')
 
             if (user) {
                 const pwValidate: boolean = bcrypt.compareSync(password, user.confirmpwd);
@@ -135,12 +135,16 @@ export default class authenticate {
                         maxAge: 24 * 60 * 60 * 1000,
                         httpOnly: true,
                         path: '/',
-                        sameSite: 'strict',
+                        sameSite: 'none',
                         secure: true,
                         // signed: true,
                     });
                     // return res.redirect('/user/dashboard');
-                    return res.status(200).json({ request: 'successfull', authentication: true, message: 'credentials authenticated successfully' })
+                    return res.status(200).json({
+                        request: 'successfull',
+                        authentication: true,
+                        message: 'credentials authenticated successfully'
+                    })
 
                 } else {
                     res.cookie('accesstoken', '', {
@@ -148,11 +152,15 @@ export default class authenticate {
                         maxAge: 1000,
                         httpOnly: true,
                         path: '/',
-                        sameSite: 'strict',
+                        sameSite: 'none',
                         secure: true,
                         // signed: true,
                     });
-                    return res.status(401).json({ request: 'successfull', authentication: false, message: 'Please verify your credentials' })
+                    return res.status(401).json({
+                        request: 'successfull',
+                        authentication: false,
+                        message: 'Please verify your credentials'
+                    })
                 }
             } else {
                 res.cookie('accesstoken', '', {
@@ -160,16 +168,24 @@ export default class authenticate {
                     maxAge: 1000,
                     httpOnly: true,
                     path: '/',
-                    sameSite: 'strict',
+                    sameSite: 'none',
                     secure: true,
                     // signed: true,
                 });
-                return res.status(401).json({ request: 'successfull', authentication: false, message: 'Please verify your credentials' })
+                return res.status(401).json({
+                    request: 'successfull',
+                    authentication: false,
+                    message: 'Please verify your credentials'
+                })
             }
 
         } catch (error) {
             console.log(error)
-            return res.status(401).json({ request: 'failed', authentication: false, message: 'Internal Server Error' })
+            return res.status(401).json({
+                request: 'failed',
+                authentication: false,
+                message: 'Internal Server Error'
+            })
         }
 
 
@@ -184,15 +200,120 @@ export default class authenticate {
                 maxAge: 1000,
                 httpOnly: true,
                 path: '/',
-                sameSite: 'strict',
+                sameSite: 'none',
                 secure: true,
                 // signed: true,
             });
-            return res.status(200).json({ request: 'successfull', authentication: false, message: 'Logged out successfully' })
+            return res.status(200).json({
+                request: 'successfull',
+                authentication: false,
+                message: 'Logged out successfully'
+            })
         } catch (error) {
             console.log(error)
-            return res.status(401).json({ request: 'failed', authentication: false, message: 'Internal Server Error' })
+            return res.status(401).json({
+                request: 'failed',
+                authentication: false,
+                message: 'Internal Server Error'
+            })
         }
     }
+
+    static resetPasswordRequest = async (req: Request, res: Response): Promise<Response> => {
+        console.log(req.body, ".....forget password.....");
+        try {
+            const { email }: ({ email: string; }) = req?.body;
+
+            let emailindb = await utility.checkEmail(email);
+            if (emailindb.status) {
+                const sendingEmail = await utility.sendResetPasswordEmail(emailindb);
+                if (sendingEmail) {
+                    return res.status(200).json({
+                        emailindb: true,
+                        type: "Reset Password Email Sent",
+                        message: 'Please Check your email, a password reset link has been sent to your email'
+                    })
+                } else {
+                    return res.status(401).json({
+                        emailindb: false,
+                        type: "email not found",
+                        message: 'This email is not associated with any account'
+                    })
+                }
+            } else {
+                return res.status(401).json({
+                    emailindb: false,
+                    type: "email not found",
+                    message: 'This email is not associated with any account'
+                })
+            }
+
+        } catch (error) {
+            console.log(error)
+            return res.status(401).json({
+                emailindb: false,
+                type: "email not found",
+                message: 'Internal Server Error'
+            })
+        }
+    }
+
+
+    static changePassword = async (req: Request, res: Response): Promise<Response> => {
+        console.log(req.body, ".....change password.....");
+        try {
+            const { password,
+                confirm_password,
+                resetid }: ({
+                    password: string;
+                    confirm_password: string;
+                    resetid: string;
+                }) = req?.body;
+            const validate = await utility.authenticateToken(resetid);
+            console.log(validate, '......')
+            if (validate.authtoken) {
+                var salt: string = bcrypt.genSaltSync(10);
+                var hash: string = bcrypt.hashSync(confirm_password, salt);
+                const uniqID = validate?.userdata?.ref;
+
+                const updated = await userprofile.findOneAndUpdate({ _id: uniqID }, { $set: { confirmpwd: hash } })
+                console.log(updated, '......update done........');
+
+                if (updated) {
+                    return res.status(200).json({
+                        action: true,
+                        type: "Password Changed",
+                        message: 'Password Changed Successfully'
+                    })
+                } else {
+                    return res.status(401).json({
+                        action: false,
+                        type: "Password Not Changed",
+                        message: 'Internal Server Error'
+                    })
+                }
+            } else {
+                return res.status(401).json({
+                    action: false,
+                    type: "Password Not Changed",
+                    message: 'Your session link has expired, please try again'
+                })
+            }
+
+            
+
+        } catch (error) {
+            console.log(error);
+            return res.status(401).json({
+                action: false,
+                type: "Password Not Changed",
+                message: 'Internal Server Error'
+            })
+        }
+    }
+
+
+
+
 
 }

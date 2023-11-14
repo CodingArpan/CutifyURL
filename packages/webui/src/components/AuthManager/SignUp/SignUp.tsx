@@ -123,8 +123,10 @@ function SignUp({
         `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,
         {
           mode: "cors",
-          method: "post",
-          headers: [["Content-Type", "application/json"]],
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           credentials: "include",
           body: JSON.stringify({ ...FormData }),
         }

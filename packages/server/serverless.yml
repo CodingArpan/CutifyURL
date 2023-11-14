@@ -1,17 +1,21 @@
 service: cutifyurl-serverless
-useDotenv: false
 provider:
   name: aws
-  deploymentMethod: direct
   runtime: nodejs18.x
-  stage: dev
   region: ap-south-1
-  timeout: 10
+  timeout: 5
 functions:
   app:
-    handler: handler.hello # required, handler set in AWS Lambda
+    handler: jsserver/app.handler # required, handler set in AWS Lambda
     name: cutifyurl-serverless # optional, Deployed Lambda name
-    description: Demo testing of serverless # optional, Description to publish to AWS
-    runtime: nodejs18.x # optional overwrite, default is provider runtime
-    runtimeManagement:
-      mode: auto # syntax required for manual, mode property also supports 'auto' or 'onFunctionUpdate' (see provider.runtimeManagement)
+    description: aws cutifyurl-serverless lambda # optional, Description to publish to AWS
+    environment:
+      DATABASE_URL: mongodb+srv://codingarpan:UG5zx6avn2U073lT@testingzone.pmogmlh.mongodb.net/cuteurl?retryWrites=true&w=majority
+      JWT_SECRET: Rfd!$%bJeUQpZ^uPPGiyYvdaESoB&jR*PZTt9EtueEJK7KZK5pbS8r32h!Poc8$2jf6FM8jgkRsE!YN9aE3z3$3DmnRZJ@nUv
+      WHITELISTORIGINS_X: ["https://cutifyurl-testing.vercel.app"]
+      WHITELISTORIGINS: ["http://localhost:3000"]
+      COOKIE_DOMAIN: ".on.aws"
+      SENDER_EMAIL: ""
+      EMAIL_ADDRESS: ""
+      EMAIL_PASS: ""
+    url: true

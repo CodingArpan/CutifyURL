@@ -96,8 +96,8 @@ class miniurl {
     }
 
     static validatekeyword = async (req: Request, res: Response): Promise<Response> => {
-        let keyword: string = req.params.keyword;
-        // console.log(keyword)
+        const keyword: string = req?.body?.keyword;
+        // console.log(req?.body)
         const availability: boolean = await utility.checkavailablity(keyword);
         return !availability ? res.status(200).json({ useable: true }) : res.status(200).json({ useable: false });
     }

@@ -56,6 +56,7 @@ const HeaderIndex = (): JSX.Element => {
         return response;
       })
       .then((data) => {
+        console.log(data);
         if (data?.authentication) {
           setUser({ ...data?.userdata });
         } else {

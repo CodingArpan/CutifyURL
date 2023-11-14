@@ -8,9 +8,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'spaceImage': "url('/spaceimage.jpeg')",
+
       },
       colors: {
         'custom_blue': '#5c9dff',

@@ -41,9 +41,20 @@ const OptionsForm = (props: PropsModal): JSX.Element => {
   };
 
   const checkkeyword = (keyword: string) => {
-    if (keyword.length >= 4) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/url/avail/${keyword}`, {
-        method: "GET",
+    const keywordRegex = new RegExp("^([a-zA-Z0-9\_\-]{4,})$");
+    // const keywordTest = keywordRegex.test(keyword);
+    const keywordTest = true;
+    console.log(keywordTest);
+    if (keyword.length >= 4 && keywordTest) {
+      console.log("first");
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/url/availkeyword`, {
+        mode: "cors",
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ keyword: keyword }),
       })
         .then(async (res) => {
           const result = await res.json();

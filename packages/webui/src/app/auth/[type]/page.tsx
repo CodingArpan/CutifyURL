@@ -8,6 +8,7 @@ import InformAlert from "@/components/Reusable/InformAlert";
 import { AlertContext } from "@/components/ContextManager/AlertContextProvider/AlertContext";
 import { AlertContextType } from "@/components/TypeInterfaces/ContextInterfaces";
 import { AlertPropsType } from "@/components/TypeInterfaces/PropsInterfaces";
+import Forgetpwd from "@/components/AuthManager/Forgetpwd/Forgetpwd";
 
 function Auth_page({ params }: { params: { type: string } }) {
   // ------------------------------ Alert Box feature-------------------
@@ -55,26 +56,36 @@ function Auth_page({ params }: { params: { type: string } }) {
           list={Alertdata.list}
         />
       </AlertContext.Provider>
-      <div className="w-full  bg-blue-50 h-screen min-h-max flex flex-row justify-center items-center ">
-        <div className="relative bg-violet-400    h-fit rounded-3xl shadow-2xl shadow-indigo-500/30 flex flex-row justify-between items-center">
-          {params.type == "signup" ? (
-            <SignUp setAlertdata={setAlertdata} />
-          ) : (
-            ""
-          )}
-          {params.type == "signin" ? (
-            <SignIn setAlertdata={setAlertdata} />
-          ) : (
-            ""
-          )}
+      {params.type == "signup" || params.type == "signin" ? (
+        <div className="w-full  bg-blue-50 h-screen min-h-max flex flex-row justify-center items-center ">
+          <div className="relative bg-violet-400    h-fit rounded-3xl shadow-2xl shadow-indigo-500/30 flex flex-row justify-between items-center">
+            {params.type == "signup" ? (
+              <SignUp setAlertdata={setAlertdata} />
+            ) : (
+              ""
+            )}
 
-          <div className="graphics relative w-max p-10 bg-transparent flex justify-center items-center ">
-            <div className="imagecontainer w-80 h-80 ">
-              <Image fill src={"/Group.svg"} alt="image" />
+            {params.type == "signin" ? (
+              <SignIn setAlertdata={setAlertdata} />
+            ) : (
+              ""
+            )}
+
+            <div className="graphics relative w-max p-10 bg-transparent flex justify-center items-center ">
+              <div className="imagecontainer w-80 h-80 ">
+                <Image fill src={"/Group.svg"} alt="image" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
+      {params.type == "forgetpassword" ? (
+        <Forgetpwd setAlertdata={setAlertdata} />
+      ) : (
+        ""
+      )}
     </>
   );
 }
