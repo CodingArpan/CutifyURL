@@ -202,7 +202,7 @@ function Page({ params }: { params: { resetid: string } }) {
                   PasswordConfirm ? "invisible" : "visible"
                 } text-pink-600 text-sm`}
               >
-                Confirm Password doesn't match
+                Confirm Password does not match
               </p>
             </div>
             <div className="btnContainer w-full flex justify-evenly">
