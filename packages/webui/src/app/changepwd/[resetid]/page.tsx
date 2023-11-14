@@ -117,7 +117,7 @@ function Page({ params }: { params: { resetid: string } }) {
         setResData({
             action: false,
             type: "error",
-            message: "can't connect to server",
+            message: "can not connect to server",
         });
     }
     setTimeout(() => {
