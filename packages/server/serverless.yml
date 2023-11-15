@@ -1,21 +1,22 @@
 service: cutifyurl-serverless
+prod_env_file: ${file(./prod_env.yml)} # importing required file with environment variables
 provider:
   name: aws
   runtime: nodejs18.x
   region: ap-south-1
-  timeout: 5
+  timeout: 3
 functions:
   app:
     handler: jsserver/app.handler # required, handler set in AWS Lambda
     name: cutifyurl-serverless # optional, Deployed Lambda name
     description: aws cutifyurl-serverless lambda # optional, Description to publish to AWS
     environment:
-      DATABASE_URL: mongodb+srv://codingarpan:UG5zx6avn2U073lT@testingzone.pmogmlh.mongodb.net/cuteurl?retryWrites=true&w=majority
-      JWT_SECRET: Rfd!$%bJeUQpZ^uPPGiyYvdaESoB&jR*PZTt9EtueEJK7KZK5pbS8r32h!Poc8$2jf6FM8jgkRsE!YN9aE3z3$3DmnRZJ@nUv
-      WHITELISTORIGINS_X: ["https://cutifyurl-testing.vercel.app"]
-      WHITELISTORIGINS: ["http://localhost:3000"]
-      COOKIE_DOMAIN: ".on.aws"
-      SENDER_EMAIL: ""
-      EMAIL_ADDRESS: ""
-      EMAIL_PASS: ""
+      DATABASE_URL: ${self:prod_env_file.DATABASE_URL}
+      JWT_SECRET: ${self:prod_env_file.JWT_SECRET}
+      WHITELISTORIGINS: ${self:prod_env_file.WHITELISTORIGINS}
+      WHITELISTORIGINS_X: ${self:prod_env_file.WHITELISTORIGINS_X}
+      COOKIE_DOMAIN: ${self:prod_env_file.COOKIE_DOMAIN}
+      SENDER_EMAIL: ${self:prod_env_file.SENDER_EMAIL}
+      EMAIL_ADDRESS: ${self:prod_env_file.EMAIL_ADDRESS}
+      EMAIL_PASS: ${self:prod_env_file.EMAIL_PASS}
     url: true
