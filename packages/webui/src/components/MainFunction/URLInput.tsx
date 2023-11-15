@@ -1,16 +1,19 @@
 "use client";
 import React, { useState } from "react";
 import { Props, PropsModal, Dataset } from "./MainFunction.index";
+import styles from "@/styles/ThreeballDropping.module.css";
 import { Jost } from "next/font/google";
 const jost = Jost({ weight: "400", subsets: ["latin"] });
 const InputURL = (props: Props): JSX.Element => {
   let { setActivateBtn, ActivateBtn, setData, Data } = props;
   const [ValidURL, setValidURL] = useState<boolean>(true);
   const [MinifiedURL, setMinifiedURL] = useState<boolean>(false);
+  const [Loader, setLoader] = useState<boolean>(false);
 
   const request_minified_url = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
+    setLoader(true);
     e.preventDefault();
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/url/short`, {
       mode: "cors",
@@ -43,6 +46,11 @@ const InputURL = (props: Props): JSX.Element => {
       })
       .catch((error) => {
         console.log(error.message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setLoader(false);
+        }, 1000);
       });
   };
 
@@ -158,7 +166,7 @@ const InputURL = (props: Props): JSX.Element => {
             clear
           </button>
 
-          {!MinifiedURL && (
+          {!MinifiedURL && !Loader && (
             <button
               onClick={(
                 e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -172,11 +180,27 @@ const InputURL = (props: Props): JSX.Element => {
                   : "bg-gray-300 text-gray-600"
               } rounded-full cursor-pointer  transition-all ease-in-out duration-200 `}
             >
-              minify
+              <p className="">minify</p>
             </button>
           )}
 
-          {MinifiedURL && (
+          {Loader && (
+            <button
+              className="minifybtn font-semibold text-base capitalize px-5 py-1
+              rounded-full cursor-pointer  transition-all ease-in-out duration-200 bg-gray-800 text-gray-300
+              flex flex-row justify-center items-center space-x-5"
+            >
+              <p className="">minifing...</p>
+              <div className={styles.loader}>
+                <div className={styles.circle}></div>
+                <div className={styles.circle}></div>
+                <div className={styles.circle}></div>
+                <div className={styles.circle}></div>
+              </div>
+            </button>
+          )}
+
+          {MinifiedURL && !Loader && (
             <button
               onClick={(
                 e: React.MouseEvent<HTMLButtonElement, MouseEvent>
