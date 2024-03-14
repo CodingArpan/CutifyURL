@@ -57,8 +57,11 @@ function Auth_page({ params }: { params: { type: string } }) {
         />
       </AlertContext.Provider>
       {params.type == "signup" || params.type == "signin" ? (
-        <div className="w-full  bg-blue-50 h-screen min-h-max flex flex-row justify-center items-center ">
-          <div className="relative bg-violet-400    h-fit rounded-3xl shadow-2xl shadow-indigo-500/30 flex flex-row justify-between items-center">
+        <div className="w-full   min-h-screen py-10 flex flex-row  justify-center items-center ">
+          <div
+            className="relative bg-[url('/auth_graphic.jpg')] bg-cover   h-fit rounded-3xl shadow-2xl shadow-orange-500/20 
+          flex flex-row mob:flex-col-reverse justify-between items-center"
+          >
             {params.type == "signup" ? (
               <SignUp setAlertdata={setAlertdata} />
             ) : (
@@ -73,7 +76,7 @@ function Auth_page({ params }: { params: { type: string } }) {
 
             <div className="graphics relative w-max p-10 bg-transparent flex justify-center items-center ">
               <div className="imagecontainer w-80 h-80 ">
-                <Image fill src={"/Group.svg"} alt="image" />
+                {/* <Image fill src={"/Group.svg"} alt="image" /> */}
               </div>
             </div>
           </div>

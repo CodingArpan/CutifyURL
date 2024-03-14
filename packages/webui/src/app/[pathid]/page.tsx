@@ -57,6 +57,7 @@ const Redirectpath = (): React.JSX.Element => {
       getPathData(pathID);
     }
 
+    let userdetails: any;
     try {
       let canvas = document.createElement("canvas") as HTMLCanvasElement;
       let webgl =
@@ -79,7 +80,7 @@ const Redirectpath = (): React.JSX.Element => {
         var userAgentData = null;
       }
 
-      const userdetails = {
+      userdetails = {
         user_screen: {
           height: window.screen.height,
           width: window.screen.width,
@@ -111,39 +112,45 @@ const Redirectpath = (): React.JSX.Element => {
       };
 
       // console.log(userdetails);
+    } catch (err) {}
+    const sendanalytics = async () => {
+      const user = await fetch("https://api.seeip.org/geoip", {
+        method: "GET",
+      });
+      const user_info = await user.json();
 
-      const sendanalytics = async () => {
-        const user = await fetch("http://ip-api.com/json", {
-          method: "GET",
-        });
-        const user_info = await user.json();
-        delete user_info.status;
-        delete user_info.lat;
-        delete user_info.lon;
-        userdetails.user_info = user_info;
+      userdetails.user_info = user_info;
 
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/redirect/data`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(userdetails),
-          }
-        );
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/redirect/data`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userdetails),
+        }
+      );
 
-        const finalres = await response.json();
+      const finalres = await response.json();
 
-        console.log(finalres);
-      };
-      sendanalytics();
-    } catch (err) {
-      console.log(err);
-    } finally {
-      if (Pdata.destination != "" && Pdata.security === false) {
+      console.log(finalres);
+
+      if (
+        Pdata.destination != "" &&
+        Pdata.security === false &&
+        finalres.request
+      ) {
         window.location.replace(Pdata.destination!);
       }
+    };
+
+    sendanalytics();
+
+    if (Pdata.destination != "" && Pdata.security === false) {
+      setTimeout(() => {
+        window.location.replace(Pdata.destination!);
+      }, 3000);
     }
   }, [Pdata, pathID]);
 

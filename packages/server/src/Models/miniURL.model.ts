@@ -8,9 +8,11 @@ export interface Shorturl_temp extends Document {
   keyword: string;
   secure: boolean;
   password: string;
-  login:boolean;
+  login: boolean;
   userid: string;
   track: boolean;
+  title?: string;
+  tags?: string[];
 }
 
 const schema = new mongoose.Schema({
@@ -66,7 +68,26 @@ const schema = new mongoose.Schema({
     trim: true,
     enum: { values: ['true', 'false'] }
 
+  },
+  title: {
+    type: String,
+    trim: true,
+    minLength: [4, 'keyword must be atleast 4 characters long'],
+    default: "null"
+  },
+  tags: {
+    type: [String],
+  },
+  clicks: {
+    type: Number,
+    default: 0
+
+  },
+  country: {
+    type: [String],
+
   }
+
 
 }, { timestamps: true });
 

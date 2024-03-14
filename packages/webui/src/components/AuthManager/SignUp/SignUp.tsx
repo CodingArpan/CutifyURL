@@ -182,29 +182,13 @@ function SignUp({
 
   const formElementDiv: string = "w-full  flex flex-col space-y-1";
   const inputElement: string =
-    "w-full border-none outline-none bg-blue-50/50 rounded-full shadow-inner shadow-indigo-500/20 text-sm py-2 px-5 placeholder:text-violet-300";
+    "w-full border-none outline-none bg-gray-100 rounded-lg  text-sm py-2 px-5 placeholder:text-gray-300";
   const errormesage: string = "text-red-500 px-3 text-xs ";
 
   return (
     <>
       <div className="form w-full py-10 px-10 flex flex-col justify-center items-center space-y-5 bg-white rounded-3xl ">
-        {/* <div className="icon">
-          <svg
-            className="w-10 h-10"
-            viewBox="0 0 48 47"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M23.1762 45.8962C35.8013 46.3208 46.4001 36.5826 46.849 24.1456C47.2979 11.7089 37.4269 1.28256 24.8018 0.85795C12.1767 0.433342 1.57867 10.1713 1.12978 22.6079C0.680883 35.045 10.5511 45.4716 23.1762 45.8962Z"
-              fill="#5D5BDB"
-            />
-            <path
-              d="M14.705 28.6239L14.6555 30.7673L31.9639 31.1389L32.0133 28.9955C32.0791 26.1447 26.3466 24.5852 23.4583 24.5232C20.5699 24.4612 14.7708 25.7732 14.705 28.6239ZM30.0476 20.3757L29.9981 22.5191L33.2437 22.5888L33.1695 25.8036L35.3327 25.85L35.4069 22.6352L38.6525 22.7049L38.702 20.5615L35.4564 20.4918L35.5306 17.2771L33.3673 17.2306L33.2932 20.4454L30.0476 20.3757ZM27.9335 18.1859C27.9881 15.8176 26.0962 13.8579 23.7055 13.8065C21.3149 13.7552 19.3341 15.6319 19.2795 18.0001C19.2248 20.3687 21.117 22.3285 23.5077 22.3798C25.8984 22.4311 27.8788 20.5545 27.9335 18.1859Z"
-              fill="white"
-            />
-          </svg>
-        </div> */}
+        
         <p className="text-xl text-gray-600 font-bold ">Create Your Account</p>
         <p className="text-sm  ">Fill the form rest we will handel</p>
         <form className={`name  ${formElementDiv} `}>
@@ -314,7 +298,7 @@ function SignUp({
               onClick={() => {
                 sendData();
               }}
-              className="bg-violet-400 shadow-lg shadow-violet-500/30 w-fit px-10 py-2 text-white font-medium rounded-full transition-all hover:scale-105 active:scale-95"
+              className="bg-orange-400 shadow-lg shadow-orange-500/30 w-fit px-10 py-2 text-white font-medium rounded-full transition-all hover:scale-105 active:scale-95"
             >
               Create +
             </button>
@@ -333,7 +317,7 @@ function SignUp({
           <p className="text-gray-700 text-sm">
             Already have an account !
             <Link href="/auth/signin">
-              <span className=" text-violet-600 px-2 underline cursor-pointer">
+              <span className=" text-orange-600 px-2 underline cursor-pointer">
                 Sign In
               </span>
             </Link>

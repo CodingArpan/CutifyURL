@@ -227,6 +227,7 @@
             <script type='text/javascript'>
                 local_URL = '<%= baseurl %>';
                 const data = document.querySelector('.url').dataset;
+                let userdetails
                 try {
                     console.log(data)
                     var canvas = document.createElement("canvas")
@@ -237,7 +238,7 @@
                     try { var userAgentData = window.navigator.userAgentData; }
                     catch (error) { var userAgentData = null; }
 
-                    const userdetails = {
+                    userdetails = {
 
                         user_screen: {
                             height: window.screen.height,
@@ -266,45 +267,48 @@
                         }
 
                     }
-
-                    const sendanalytics = async () => {
-                        const user = await fetch('http://ip-api.com/json', { method: 'GET' })
-                        const user_info = await user.json();
-                        delete user_info.status;
-                        delete user_info.lat;
-                        delete user_info.lon;
-                        userdetails.user_info = user_info;
-                        userdetails.pathid = data.id;
-                        userdetails.refid = data.ref;
-
-                        const response = await fetch(`${local_URL}/redirect/data`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(userdetails)
-                        })
-
-                        const finalres = await response.json();
-
-                        console.log(finalres)
-                        if (finalres.request && data.secure === 'false') {
-                            window.location.replace(data.url);
-                        }
-                        // return response;
-
-
-
-                    }
-
-                    sendanalytics();
-
-
                 } catch (err) {
-                    console.log(err)
-                    window.location.replace(data.url);
+                    console.log("error occured")
+                }
+
+                const sendanalytics = async () => {
+                    const user = await fetch('https://api.seeip.org/geoip', { method: 'GET' })
+                    const user_info = await user.json();
+                    userdetails.user_info = user_info;
+                    userdetails.pathid = data.id;
+                    userdetails.refid = data.ref;
+                    const response = await fetch(`${local_URL}/redirect/data`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(userdetails)
+                    })
+
+                    const finalres = await response.json();
+
+                    console.log(finalres)
+                    if (finalres.request && data.secure === 'false') {
+                        // window.location.replace(data.url);
+                    }
+                    // return response;
+
+
 
                 }
+
+                try {
+                    sendanalytics();
+                } catch (e) {
+
+                }
+
+
+
+                setTimeout(() => {
+
+                    // window.location.replace(data.url);
+                }, 5000)
 
             </script>
 

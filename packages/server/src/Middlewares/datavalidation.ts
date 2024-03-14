@@ -29,7 +29,8 @@ export default class validation {
                     then: yup.string().min(4, 'userid must be atleast 4 characters long').matches(/[0-9]{4,}/g, 'userid must be atleast 4 characters long and contains only numbers').required(),
                     otherwise: yup.string().max(0),
                 }),
-            track: yup.boolean().required()
+            track: yup.boolean().required(),
+            
         });
 
         schema

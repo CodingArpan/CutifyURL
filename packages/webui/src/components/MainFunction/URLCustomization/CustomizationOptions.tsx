@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import { Props, PropsModal, Dataset } from "../MainFunction.index";
 import CustomizationForm from "./CustomizationForm";
-import { Jost } from "next/font/google";
-const jost = Jost({ weight: "400", subsets: ["latin"] });
 const Minifyoptions = (props: Props): JSX.Element => {
   let { ActivateBtn, setData } = props;
 
@@ -11,7 +9,6 @@ const Minifyoptions = (props: Props): JSX.Element => {
 
   return (
     <div
-      style={jost.style}
       className={`flex flex-row justify-center items-center md:space-x-10 mob_only:space-y-10 mob_only:flex-wrap ${
         ActivateBtn ? "" : "mob_only:pt-8"
       }`}
@@ -94,7 +91,7 @@ const Minifyoptions = (props: Props): JSX.Element => {
         </label>
       </div>
 
-      <div className="relative flex flex-row justify-evenly md:items-center items-start md:space-x-10 mob_only:w-full">
+      {/* <div className="relative flex flex-row justify-evenly md:items-center items-start md:space-x-10 mob_only:w-full">
         <label
           htmlFor="modal"
           className={`trackurl flex flex-row justify-between items-center space-x-3 cursor-pointer before:opacity-0 before:invisible hover:before:visible hover:before:opacity-100 ${
@@ -152,7 +149,7 @@ const Minifyoptions = (props: Props): JSX.Element => {
             Track URL Clicks
           </p>
         </label>
-      </div>
+      </div> */}
     </div>
   );
 };

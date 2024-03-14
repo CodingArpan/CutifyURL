@@ -113,37 +113,49 @@ const dataSchema = new mongoose.Schema({
         },
     },
     user_info: {
+        ip: {
+            type: String,
+        },
+        continent_code: {
+            type: String,
+        },
         country: {
             type: String,
         },
-        countryCode: {
+        country_code: {
+            type: String,
+        },
+        country_code3: {
             type: String,
         },
         region: {
             type: String,
         },
-        regionName: {
+        region_code: {
             type: String,
         },
         city: {
             type: String,
         },
-        zip: {
+        postal_code: {
+            type: String,
+        },
+        latitude: {
+            type: String,
+        },
+        longitude: {
             type: String,
         },
         timezone: {
             type: String,
         },
-        isp: {
+        offset: {
             type: String,
         },
-        org: {
+        asn: {
             type: String,
         },
-        as: {
-            type: String,
-        },
-        query: {
+        organization: {
             type: String,
         },
     },

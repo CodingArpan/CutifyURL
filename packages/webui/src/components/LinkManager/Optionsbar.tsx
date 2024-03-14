@@ -14,7 +14,7 @@ const Optionsbar = ({ Active, setActive }: Props) => {
           });
         }}
       />
-      <label
+      {/* <label
         htmlFor="dashboard_label"
         className={` rounded-lg flex flex-row justify-start items-center space-x-2 cursor-pointer py-2 px-4 my-1 ${
           Active == "Dashboard"
@@ -34,7 +34,7 @@ const Optionsbar = ({ Active, setActive }: Props) => {
           </svg>
         </div>
         <p className="">Dashboard</p>
-      </label>
+      </label> */}
 
       <input
         className="hidden peer/Filtersearch"
@@ -80,7 +80,7 @@ const Optionsbar = ({ Active, setActive }: Props) => {
           });
         }}
       />
-      <label
+      {/* <label
         htmlFor="account_label"
         className="hover:bg-blue-50 rounded-lg flex flex-row justify-start items-center space-x-2 cursor-pointer py-2 px-4 my-1 peer-checked/Account:bg-blue-500 peer-checked/Account:text-white"
       >
@@ -96,7 +96,7 @@ const Optionsbar = ({ Active, setActive }: Props) => {
           </svg>
         </div>
         <p className="">Account</p>
-      </label>
+      </label> */}
     </div>
   );
 };

@@ -10,7 +10,7 @@ class miniurl {
 
             let { destination, custom, keyword, secure, password, login, userid, track }: Shorturl_temp = req.body;
 
-            // console.log(req.body)
+            console.log(req.body)
 
             switch (custom) {
                 case true:
@@ -44,7 +44,7 @@ class miniurl {
                     if (typeof (genID) === 'string') {
                         keyword = genID;
                         break;
-                    }else{
+                    } else {
                         return res.status(200).json({
                             request: 'failed',
                             status: false,
@@ -100,6 +100,18 @@ class miniurl {
         // console.log(req?.body)
         const availability: boolean = await utility.checkavailablity(keyword);
         return !availability ? res.status(200).json({ useable: true }) : res.status(200).json({ useable: false });
+    }
+
+    static getUrlData = async (req: Request, res: Response): Promise<Response | void> => {
+
+        const { login, userid } = req.body;
+        // console.log(login, userid);
+
+        const alldata = await shortUrl.find({ userid: userid }).select('destination keyword secure title tags clicks country updatedAt')
+        // console.log(alldata)
+
+        res.status(200).json(alldata.reverse());
+
     }
 
 }

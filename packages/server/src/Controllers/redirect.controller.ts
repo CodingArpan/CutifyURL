@@ -34,10 +34,10 @@ class redirection {
                     refid: data._id.toString(),
                 }
                 return res.status(200).json({ ...datapass })
+                // @ts-ignore
                 // return res.render('Collectanalytics', { ...datapass });
             } else {
                 return res.status(200).json({ refid: '0' })
-
             }
 
         } catch (err) {
@@ -51,11 +51,11 @@ class redirection {
     }
 
     static redirectdatacollection = async (req: Request, res: Response): Promise<Response | void> => {
-        // console.log(req.body)
+        console.log(req.body, "-------------------")
+        let { pathid, refid }: userdata_temp = req.body;
         try {
 
 
-            let { pathid, refid }: userdata_temp = req.body;
             console.log(pathid, refid)
 
             let available: ({ _id: string, destination: string })[] = await shortUrl.find({ keyword: pathid, _id: refid }).select('destination');
@@ -65,12 +65,13 @@ class redirection {
             if (available.length) {
                 let saved = await userData.create<userdata_temp>({ ...req.body });
                 // console.log(saved)
-                return res.status(200).json({
+                res.status(200).json({
                     request: 'successfull',
                     status: 200
                 })
+
             } else {
-                return res.status(200).json({
+                res.status(200).json({
                     request: 'failed',
                     message: 'Not Found'
                 })
@@ -78,11 +79,33 @@ class redirection {
 
 
         } catch (error) {
-            return res.status(500).json({
+            res.status(500).json({
                 request: 'failed',
                 message: 'Internal Server Error'
             })
         }
+
+        try {
+            let found: any = await shortUrl.findById(refid);
+            let totalclicks = found.clicks;
+            let currentcountry = req.body.user_info.country.toLowerCase();
+            let country = JSON.parse(JSON.stringify(found.country));
+            if (!country.includes(currentcountry)) {
+                country.push(currentcountry)
+            }
+            console.log(totalclicks, country);
+            let update: any = await shortUrl.updateOne({ _id: refid }, { clicks: ++totalclicks, country: country });
+            console.log(update);
+
+
+        } catch (err) {
+            console.log(err)
+        }
+
+
+
+
+
     }
 
     static redirectpasswordvalidation = async (req: Request, res: Response): Promise<Response> => {

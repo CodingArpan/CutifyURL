@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import { Props, PropsModal, Dataset } from "./MainFunction.index";
 import styles from "@/styles/ThreeballDropping.module.css";
-import { Jost } from "next/font/google";
-const jost = Jost({ weight: "400", subsets: ["latin"] });
 const InputURL = (props: Props): JSX.Element => {
   let { setActivateBtn, ActivateBtn, setData, Data } = props;
   const [ValidURL, setValidURL] = useState<boolean>(true);
@@ -133,7 +131,7 @@ const InputURL = (props: Props): JSX.Element => {
   return (
     <>
       <div
-        style={jost.style}
+       
         className={`bg-blue-50 border border-blue-400/10 relative  border-solid shadow-lg shadow-blue-500/30 rounded-full flex flex-row justify-between items-center p-2.5  before:w-full  before:text-lg before:text-red-400 before:absolute before:-top-9 before:capitalize before:z-50 ${
           ValidURL ? "" : "before:content-['It_is_not_a_valid_URL_⚠️']"
         }`}

@@ -9,6 +9,10 @@ router.post('/availkeyword', miniurl.validatekeyword)
 
 router.post('/short', utility.verifyAuthTokenOptional, validation.shorturlrequest, miniurl.createShortUrl)
 
+router.post('/getall', utility.verifyAuthTokenOptional, miniurl.getUrlData);
+
+
+
 
 
 

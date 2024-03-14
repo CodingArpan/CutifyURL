@@ -1,12 +1,8 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-
-const roboto = Roboto({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-});
+import { Jost, Josefin_Sans } from "next/font/google";
+const jost = Jost({ subsets: ["latin"] });
+const josefin_sans = Josefin_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CutifyURL - The Ultimate Url Shortner and Tracker",
@@ -21,8 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>{/* <meta http-equiv="refresh" content="5"></meta> */}</head>
-      <body className={roboto.className}>{children}</body>
+      <body className={josefin_sans.className}>{children}</body>
     </html>
   );
 }

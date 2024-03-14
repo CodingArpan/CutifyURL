@@ -27,6 +27,11 @@ export interface Dataset {
   login: boolean;
   userid: string;
   track: boolean;
+  title?:string;
+  tags?:string[];
+  clicks?:string;
+  country?:string[];
+  updatedAt?:string;
 }
 
 

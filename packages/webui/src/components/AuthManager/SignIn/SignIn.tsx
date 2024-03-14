@@ -190,7 +190,7 @@ function SignIn({
                   sendData();
                 }}
                 type="button"
-                className="bg-violet-400 shadow-lg shadow-violet-500/30 w-fit px-10 py-2
+                className="bg-orange-400 shadow-lg shadow-orange-500/30 w-fit px-10 py-2
                text-white font-medium rounded-full transition-all hover:scale-105 active:scale-95"
               >
                 Sign in
@@ -211,7 +211,7 @@ function SignIn({
           <p className="w-full px-6 text-sm text-center ">
             Don&#39;t have an account yet?
             <Link href="/auth/signup">
-              <span className="underline text-sm text-violet-500 cursor-pointer px-2">
+              <span className="underline text-sm text-orange-500 cursor-pointer px-2">
                 Sign up
               </span>
             </Link>
