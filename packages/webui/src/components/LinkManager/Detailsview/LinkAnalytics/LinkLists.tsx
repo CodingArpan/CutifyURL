@@ -55,6 +55,7 @@ const LinkLists = (props: LinkListProps) => {
         {Urldata?.map((val: Dataset) => {
           return (
             <ListComponent
+              key={val.keyword}
               destination={val.destination}
               keyword={val.keyword}
               secure={val.secure}
