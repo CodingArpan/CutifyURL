@@ -40,7 +40,6 @@ const AddFilterTags = (props: CustomFilterProps) => {
       )}
       <div className="w-full input flex justify-start items-center space-x-3 ">
         <input
-         
           onChange={(e) => {
             setNewTag(e.target.value.toLowerCase().trim());
           }}
@@ -77,10 +76,10 @@ const AddFilterTags = (props: CustomFilterProps) => {
         </div>
       </div>
       <div className="flex flex-wrap gap-2">
-        {filtertags.map((tag, index) => {
+        {filtertags?.map((tag, index) => {
           return (
             <div
-              key={index}
+              key={`a_` + index}
               className="relative flex justify-center items-center space-x-2 group px-3 py-1 bg-gray-200 rounded-full w-max"
             >
               <div className="text-gray-700">{tag}</div>
