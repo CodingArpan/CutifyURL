@@ -8,6 +8,8 @@ import Image from "next/image";
 export default function Home() {
   //  ----------------only testing that the server is running properly or not----------------
   useEffect(() => {
+    try{
+
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/checkup`, {
       mode: "no-cors",
       method: "GET",
@@ -20,6 +22,10 @@ export default function Home() {
         return response;
       })
       .then((data) => console.log(data));
+    }
+    catch(err){
+      console.log(err);
+    }
   }, []);
   // ----------------------------------------------------------------------------------------
   return (
