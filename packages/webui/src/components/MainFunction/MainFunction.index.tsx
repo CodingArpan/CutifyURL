@@ -38,43 +38,43 @@ export interface Dataset {
 const HeaderIndex = (): JSX.Element => {
   const [User, setUser] = useState<UserType>(null);
 
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/checkaccesstoken`, {
-      mode: "cors",
-      credentials: "include",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userid: "" }),
-    })
-      .then(async (res) => {
-        //   {
-        //     "authentication": true,
-        //     "message": "session active",
-        //     "userdata": {
-        //         "name": "arpan das",
-        //         "ref": "654e3896809859186734fd35"
-        //     }
-        // }
-        const response = await res.json();
-        return response;
-      })
-      .then((data) => {
-        console.log(data);
-        if (data?.authentication) {
-          setUser({ ...data?.userdata });
-        } else {
-          setUser(null);
-        }
-        console.log(data);
-      })
-      .catch((error) => {
-        setUser(null);
-        console.log(error);
-      });
+  // useEffect(() => {
+  //   fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/checkaccesstoken`, {
+  //     mode: "cors",
+  //     credentials: "include",
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ userid: "" }),
+  //   })
+  //     .then(async (res) => {
+  //       //   {
+  //       //     "authentication": true,
+  //       //     "message": "session active",
+  //       //     "userdata": {
+  //       //         "name": "arpan das",
+  //       //         "ref": "654e3896809859186734fd35"
+  //       //     }
+  //       // }
+  //       const response = await res.json();
+  //       return response;
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       if (data?.authentication) {
+  //         setUser({ ...data?.userdata });
+  //       } else {
+  //         setUser(null);
+  //       }
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       setUser(null);
+  //       console.log(error);
+  //     });
       
-  }, []);
+  // }, []);
   const [ActivateBtn, setActivateBtn] = useState<boolean>(false);
   const [Data, setData] = useState<Dataset>({
     destination: "",
