@@ -25,21 +25,24 @@ const LinkLists = (props: LinkListProps) => {
   const [Urldata, setUrldata] = useState([]);
 
   useEffect(() => {
-    const getallurldata = async () => {
-      const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/url/getall`, {
-        mode: "cors",
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        credentials: "include",
-      });
-      const result = await req.json();
-      setUrldata(result);
-      console.log(result, "--------------------------");
-    };
-
     try {
+      const getallurldata = async () => {
+        const req = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/url/getall`,
+          {
+            mode: "cors",
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+        const result = await req.json();
+        setUrldata(result);
+        console.log(result, "--------------------------");
+      };
+
       getallurldata();
     } catch (err) {
       console.log(err, "-----------------");

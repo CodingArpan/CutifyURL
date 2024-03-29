@@ -104,14 +104,15 @@ export default class utility {
 
         try {
             let decoded: string | any = jwt.verify(accesstoken, jwtkey!);
-            console.log(decoded.data)
+            // console.log(decoded.data)
             let status: authenticateTokenReturnType = {
                 authtoken: true,
                 userdata: decoded.data
             }
             return status;
         } catch (err) {
-            console.log(err, '................')
+            // console.log(err, '................')
+            console.log("-----JWT verification failed / Invalid-----")
             let status: authenticateTokenReturnType = {
                 authtoken: false,
                 userdata: {}

@@ -73,6 +73,7 @@ const HeaderIndex = (): JSX.Element => {
         setUser(null);
         console.log(error);
       });
+      
   }, []);
   const [ActivateBtn, setActivateBtn] = useState<boolean>(false);
   const [Data, setData] = useState<Dataset>({
