@@ -43,7 +43,7 @@ const LinkLists = (props: LinkListProps) => {
         console.log(result, "--------------------------");
       };
 
-      getallurldata();
+      // getallurldata();
     } catch (err) {
       console.log(err, "-----------------");
     }
