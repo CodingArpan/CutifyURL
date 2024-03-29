@@ -39,7 +39,9 @@ const LinkLists = (props: LinkListProps) => {
       })
       .then((data) => {
         console.log(data);
-        setUrldata(data);
+        if (!data.message) {
+          setUrldata(data);
+        }
       })
       .catch((error) => {
         console.log(error + "-------------------");
