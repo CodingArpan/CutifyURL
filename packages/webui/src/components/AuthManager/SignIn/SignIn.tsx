@@ -37,6 +37,7 @@ function SignIn({
         const emailRegx =
           /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/gi;
         const emailTest = emailRegx.test(userInput);
+        console.log(emailTest + "-----------------------------");
         emailTest ? setEmail(true) : setEmail(false);
         emailTest ? (e.target.value = e.target.value.toLowerCase()) : "";
         emailTest && (dataValidation = true);
@@ -146,18 +147,20 @@ function SignIn({
         <div className="space-y-4">
           <div>
             <label htmlFor="email" className="block mb-2 text-sm">
-              Email Address / Phone Number
+              Email Address
             </label>
             <input
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 userInput(e)
               }
+              required
               type="email"
               name="email"
               id="email"
               placeholder="leroy@jenkins.com"
               className="w-full px-3 py-2 border outline-none rounded-md "
             />
+            {!Email && <p className="text-red-400 text-sm">Given input is not an email</p>}
           </div>
           <div>
             <div className="flex justify-between mb-2">
@@ -174,6 +177,7 @@ function SignIn({
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 userInput(e)
               }
+              required
               type="password"
               name="password"
               id="password"
